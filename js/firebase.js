@@ -1,20 +1,23 @@
 // تهيئة Firebase
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPhoneNumber, signOut, onAuthStateChanged, RecaptchaVerifier } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
 
 // تكوين Firebase
 const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.FIREBASE_APP_ID
+    apiKey: "AIzaSyDJ_tmqg6FZYTa2tNnmfJZYD_xcBMXSX9I",
+    authDomain: "stor-57fed.firebaseapp.com",
+    projectId: "stor-57fed",
+    storageBucket: "stor-57fed.firebasestorage.app",
+    messagingSenderId: "500181738580",
+    appId: "1:500181738580:web:26f9251f448eb6ae3479c1",
+    measurementId: "G-XQXBEKWBW9"
 };
 
 // تهيئة التطبيق
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const analytics = getAnalytics(app);
 
 // تهيئة RecaptchaVerifier
 let recaptchaVerifier;
@@ -74,9 +77,8 @@ export const verifyCode = async (code) => {
         const userCredential = await confirmationResult.confirm(code);
         const user = userCredential.user;
 
-        // الحصول على رمز المصادقة وفحص الصلاحيات
-        const idTokenResult = await user.getIdTokenResult();
-        const isAdmin = idTokenResult.claims.admin === true;
+        // التحقق من رقم الهاتف للمسؤول
+        const isAdmin = user.phoneNumber === '+9647727139210';
 
         // تخزين معلومات المستخدم في localStorage
         localStorage.setItem('user', JSON.stringify({
@@ -146,9 +148,8 @@ export const checkAdminAuth = async () => {
         const user = await checkAuthState();
         if (!user) throw new Error('لم يتم تسجيل الدخول');
 
-        // التحقق من رمز المصادقة والصلاحيات
-        const idTokenResult = await user.getIdTokenResult();
-        const isAdmin = idTokenResult.claims.admin === true;
+        // التحقق من رقم الهاتف للمسؤول
+        const isAdmin = user.phoneNumber === '+9647727139210';
 
         if (!isAdmin) {
             throw new Error('غير مصرح بالوصول');
