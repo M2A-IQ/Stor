@@ -84,119 +84,76 @@
             </button>
         </div>
 
+        <!-- نافذة إضافة قسم جديد -->
+        <div class="modal fade" id="addCategoryModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">إضافة قسم جديد</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form id="addCategoryForm">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="categoryName" class="form-label">اسم القسم</label>
+                                <input type="text" class="form-control" id="categoryName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryDescription" class="form-label">وصف القسم</label>
+                                <textarea class="form-control" id="categoryDescription" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryIcon" class="form-label">أيقونة القسم</label>
+                                <input type="text" class="form-control" id="categoryIcon" placeholder="fas fa-laptop" required>
+                                <small class="text-muted">استخدم أيقونات Font Awesome (مثال: fas fa-laptop)</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="submit" class="btn btn-primary">إضافة</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة تعديل القسم -->
+        <div class="modal fade" id="editCategoryModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">تعديل القسم</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form id="editCategoryForm">
+                        <input type="hidden" id="editCategoryId">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="editCategoryName" class="form-label">اسم القسم</label>
+                                <input type="text" class="form-control" id="editCategoryName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCategoryDescription" class="form-label">وصف القسم</label>
+                                <textarea class="form-control" id="editCategoryDescription" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCategoryIcon" class="form-label">أيقونة القسم</label>
+                                <input type="text" class="form-control" id="editCategoryIcon" required>
+                                <small class="text-muted">استخدم أيقونات Font Awesome (مثال: fas fa-laptop)</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- عرض الأقسام -->
         <div class="row g-4">
-            <!-- تصنيف الإلكترونيات -->
-            <div class="col-md-6 col-lg-4" id="category-1">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-laptop text-primary me-2"></i>
-                                إلكترونيات
-                            </h5>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#" onclick="editCategory(1)"><i class="fas fa-edit me-1"></i> تعديل</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteCategory(1)"><i class="fas fa-trash me-1"></i> حذف</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="card-text text-muted">أجهزة وملحقات إلكترونية متنوعة</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">45 منتج</span>
-                            <small class="text-muted">تم التحديث: 2023/12/15</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- تصنيف الملابس -->
-            <div class="col-md-6 col-lg-4" id="category-2">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-tshirt text-success me-2"></i>
-                                ملابس
-                            </h5>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#" onclick="editCategory(2)"><i class="fas fa-edit me-1"></i> تعديل</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteCategory(2)"><i class="fas fa-trash me-1"></i> حذف</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="card-text text-muted">ملابس رجالية ونسائية وأطفال</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-success">32 منتج</span>
-                            <small class="text-muted">تم التحديث: 2023/12/14</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- تصنيف الأثاث المنزلي -->
-            <div class="col-md-6 col-lg-4" id="category-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-couch text-warning me-2"></i>
-                                أثاث منزلي
-                            </h5>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#" onclick="editCategory(3)"><i class="fas fa-edit me-1"></i> تعديل</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteCategory(3)"><i class="fas fa-trash me-1"></i> حذف</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="card-text text-muted">أثاث وديكورات منزلية</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-warning">18 منتج</span>
-                            <small class="text-muted">تم التحديث: 2023/12/13</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- تصنيف المستلزمات الرياضية -->
-            <div class="col-md-6 col-lg-4" id="category-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-running text-info me-2"></i>
-                                مستلزمات رياضية
-                            </h5>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#" onclick="editCategory(4)"><i class="fas fa-edit me-1"></i> تعديل</a></li>
-                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteCategory(4)"><i class="fas fa-trash me-1"></i> حذف</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="card-text text-muted">معدات وملابس رياضية</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-info">25 منتج</span>
-                            <small class="text-muted">تم التحديث: 2023/12/12</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- سيتم تحميل الأقسام هنا بواسطة JavaScript -->
         </div>
     </div>
 
@@ -245,34 +202,6 @@
     <script src="../js/main.js"></script>
     <script src="js/admin.js"></script>
 
-    <!-- سكريبت خاص بصفحة الأقسام -->
-    <script>
-        // دالة تعديل التصنيف
-        function editCategory(categoryId) {
-            // في التطبيق الحقيقي، سيتم فتح نموذج لتعديل التصنيف
-            alert('تعديل التصنيف رقم ' + categoryId);
-        }
-
-        // دالة حذف التصنيف
-        function deleteCategory(categoryId) {
-            if (confirm('هل أنت متأكد من حذف هذا التصنيف؟')) {
-                const categoryElement = document.querySelector(`#category-${categoryId}`);
-                if (categoryElement) {
-                    categoryElement.remove();
-                    addNotification('success', 'تم حذف التصنيف بنجاح');
-                }
-            }
-        }
-
-        // معالجة نموذج إضافة تصنيف
-        document.getElementById('addCategoryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // في التطبيق الحقيقي، سيتم إرسال بيانات التصنيف إلى الخادم
-            alert('تم إضافة التصنيف بنجاح');
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
-            modal.hide();
-            this.reset();
-        });
-    </script>
+    <script src="js/categories.js"></script>
 </body>
 </html>
